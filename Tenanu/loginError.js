@@ -1,0 +1,1 @@
+document.querySelector('.error').innerHTML
