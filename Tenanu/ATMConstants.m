@@ -8,5 +8,10 @@
 
 #import "ATMConstants.h"
 
+// Preferences
 NSString * const kTenanuLastLoginDate = @"LastLoginDate";
 NSString * const kTenanuCredentials = @"Credentials";
+
+// Notifications
+NSString * const kTenanuNotificationRefreshNeeded = @"kTenanuNotificationRefreshNeeded";
+

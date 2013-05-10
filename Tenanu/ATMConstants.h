@@ -10,3 +10,5 @@
 
 extern NSString * const kTenanuLastLoginDate;
 extern NSString * const kTenanuCredentials;
+
+extern NSString * const kTenanuNotificationRefreshNeeded;

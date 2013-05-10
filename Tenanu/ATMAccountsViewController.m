@@ -22,17 +22,34 @@
 
 @implementation ATMAccountsViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(timeoutNotification:) name:kTenanuNotificationRefreshNeeded object:nil];
+    
     if (!self.accountRequest)
         [self refresh:nil];
+}
+
+- (void)timeoutNotification:(NSNotification *)n {
+    [self.navigationController popToViewController:self animated:YES];
+    [self refresh:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kTenanuNotificationRefreshNeeded object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     [self.tableView reloadData];
+    
+    if (self.accountRequest) {
+        [self updateProgress];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -69,32 +86,26 @@
         self.accountRequest = anAccountRequest;
         
         if ([self.accountRequest isValid]) {
-            [_daysProgress setProgress:[self.accountRequest daysPercentage]];
-            _daysText.text = [self.accountRequest totalDaysDescription];
-            
-            _hoursText.text = [self.accountRequest totalHoursDescription];
-            [_hoursProgress setProgress:[self.accountRequest hoursPercentage]];
-            
-            self.footerView.hidden = NO;
-            
-
+            [self updateProgress];
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unknown error occurred" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         }
         
-        //self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 		[self.tableView reloadData];
-        
-        //self.tableView.tableHeaderView = headerView;
-        //self.tableView.tableFooterView = footerView;
 	}];
 }
 
+- (void)updateProgress {
+    [_daysProgress setProgress:[self.accountRequest daysPercentage] animated:YES];
+    _daysText.text = [self.accountRequest totalDaysDescription];
+    
+    _hoursText.text = [self.accountRequest totalHoursDescription];
+    [_hoursProgress setProgress:[self.accountRequest hoursPercentage] animated:YES];
+    
+    self.footerView.hidden = NO;
+}
 
-//- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender  {
-//    return NO;
-//}
 
 - (IBAction)signIn:(UIStoryboardSegue *)segue {
     
