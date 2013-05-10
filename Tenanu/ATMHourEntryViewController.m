@@ -14,14 +14,25 @@
 @property (nonatomic, strong) NSArray *pickerHours;
 @end
 
+
+static NSDateFormatter *formatter;
+
 @implementation ATMHourEntryViewController
+
++ (void)initialize {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        formatter = [[NSDateFormatter alloc] init];
+        formatter.dateStyle = NSDateFormatterMediumStyle;
+    });
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.accountLabel.text = self.accountName;
     self.hourField.text = self.hours;
-    self.dateLabel.text = [self.date description];
+    self.dateLabel.text = [formatter stringFromDate:self.date];
     
     [self setupPicker];
 }
