@@ -12,6 +12,9 @@
 		91208866173C51CC0019171B /* navigateEditTimesheet.js in Resources */ = {isa = PBXBuildFile; fileRef = 91208864173C51B90019171B /* navigateEditTimesheet.js */; };
 		91208869173C5FB60019171B /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 91208868173C5FB60019171B /* MBProgressHUD.m */; };
 		9120886B173C639D0019171B /* shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9120886A173C639D0019171B /* shadow@2x.png */; };
+		91A31404173DAF0700F6D30C /* ptoBalance.js in Resources */ = {isa = PBXBuildFile; fileRef = 91A31403173DAEFF00F6D30C /* ptoBalance.js */; };
+		91A3140A173DB2E900F6D30C /* iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 91A31409173DB2E900F6D30C /* iPhone.png */; };
+		91A3140C173DB2ED00F6D30C /* iPhone Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 91A3140B173DB2ED00F6D30C /* iPhone Retina.png */; };
 		91D54EA5173C08F200F90EA8 /* loginError.js in Resources */ = {isa = PBXBuildFile; fileRef = 91D54EA3173C002700F90EA8 /* loginError.js */; };
 		91D54EA7173C0A7800F90EA8 /* test-data.json in Resources */ = {isa = PBXBuildFile; fileRef = 91D54EA6173C0A7800F90EA8 /* test-data.json */; };
 		91D54EAA173C107A00F90EA8 /* ATMHoursCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D54EA9173C107A00F90EA8 /* ATMHoursCell.m */; };
@@ -80,6 +83,9 @@
 		91208867173C5FB60019171B /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		91208868173C5FB60019171B /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		9120886A173C639D0019171B /* shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shadow@2x.png"; sourceTree = "<group>"; };
+		91A31403173DAEFF00F6D30C /* ptoBalance.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ptoBalance.js; sourceTree = "<group>"; };
+		91A31409173DB2E900F6D30C /* iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPhone.png; path = ../iPhone.png; sourceTree = "<group>"; };
+		91A3140B173DB2ED00F6D30C /* iPhone Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhone Retina.png"; path = "../iPhone Retina.png"; sourceTree = "<group>"; };
 		91D54EA3173C002700F90EA8 /* loginError.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = loginError.js; sourceTree = "<group>"; };
 		91D54EA6173C0A7800F90EA8 /* test-data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "test-data.json"; sourceTree = "<group>"; };
 		91D54EA8173C107A00F90EA8 /* ATMHoursCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMHoursCell.h; sourceTree = "<group>"; };
@@ -211,6 +217,8 @@
 		91F0C445173AD97C00BF24F2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				91A3140B173DB2ED00F6D30C /* iPhone Retina.png */,
+				91A31409173DB2E900F6D30C /* iPhone.png */,
 				9120886A173C639D0019171B /* shadow@2x.png */,
 				91F0C446173AD97C00BF24F2 /* Tenanu-Info.plist */,
 				91F0C447173AD97C00BF24F2 /* InfoPlist.strings */,
@@ -306,6 +314,7 @@
 				91208864173C51B90019171B /* navigateEditTimesheet.js */,
 				91F0C4B0173AEDA800BF24F2 /* queryPage.js */,
 				91F0C4B1173AEDA800BF24F2 /* saveHours.js */,
+				91A31403173DAEFF00F6D30C /* ptoBalance.js */,
 				91D54EA6173C0A7800F90EA8 /* test-data.json */,
 			);
 			name = JavaScript;
@@ -411,12 +420,15 @@
 				91208866173C51CC0019171B /* navigateEditTimesheet.js in Resources */,
 				91F0C4C7173AF0DB00BF24F2 /* queryPage.js in Resources */,
 				91F0C4C8173AF0DB00BF24F2 /* saveHours.js in Resources */,
+				91A31404173DAF0700F6D30C /* ptoBalance.js in Resources */,
 				91F0C449173AD97C00BF24F2 /* InfoPlist.strings in Resources */,
 				91F0C451173AD97C00BF24F2 /* Default.png in Resources */,
 				91F0C453173AD97C00BF24F2 /* Default@2x.png in Resources */,
 				91F0C455173AD97C00BF24F2 /* Default-568h@2x.png in Resources */,
 				91F0C458173AD97C00BF24F2 /* MainStoryboard.storyboard in Resources */,
 				9120886B173C639D0019171B /* shadow@2x.png in Resources */,
+				91A3140A173DB2E900F6D30C /* iPhone.png in Resources */,
+				91A3140C173DB2ED00F6D30C /* iPhone Retina.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

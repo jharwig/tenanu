@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *hoursText;
 @property (weak, nonatomic) IBOutlet UILabel *daysText;
 @property (weak, nonatomic) IBOutlet UIView *footerView;
+@property (weak, nonatomic) IBOutlet UILabel *leaveBalanceText;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (IBAction)refresh:(id)sender;
 @end

@@ -30,7 +30,7 @@
     
     self.urlField.text = credentials[@"url"] ? credentials[@"url"] : @"https://timecards.altamiracorp.com";
     self.usernameField.text = credentials[@"username"];
-    //self.passwordField.text = @"";    
+    //self.passwordField.text = @"";
     
     [self updated:nil];
 }

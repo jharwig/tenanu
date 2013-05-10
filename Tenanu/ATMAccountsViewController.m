@@ -28,6 +28,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(timeoutNotification:) name:kTenanuNotificationRefreshNeeded object:nil];
     
+    self.footerView.hidden = YES;
+    
     if (!self.accountRequest)
         [self refresh:nil];
 }
@@ -68,14 +70,18 @@
     [super prepareForSegue:segue sender:sender];
 }
 
-- (IBAction)refresh:(id)sender {
-    
+- (IBAction)refresh:(id)sender {    
+
     if (!self.accountRequest)
         self.footerView.hidden = YES;
+
     
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES].labelText = @"Loading";
+    
 	[[UnanetService sharedInstance] chargesWithCompletion:^(AccountRequest *anAccountRequest, NSString *error){
         [MBProgressHUD hideHUDForView:self.view animated:YES];
+        self.navigationItem.rightBarButtonItem.enabled = YES;
         
         if (!anAccountRequest) {
             errorMessage = error;
@@ -87,6 +93,17 @@
         
         if ([self.accountRequest isValid]) {
             [self updateProgress];
+            
+            [self.activityIndicator startAnimating];
+            self.activityIndicator.hidden = NO;
+            self.leaveBalanceText.text = nil;
+            [[UnanetService sharedInstance] leaveBalanceWithCompletion:^(NSString *balance, NSString *errorMessage) {
+                self.leaveBalanceText.text = [balance stringByAppendingString:@" hours"];
+                self.leaveBalanceText.hidden = NO;
+                [self.activityIndicator stopAnimating];
+                self.activityIndicator.hidden = YES;
+            }];
+            
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unknown error occurred" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];

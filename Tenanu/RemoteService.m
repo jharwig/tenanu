@@ -35,6 +35,7 @@
 }
 
 - (void)chargesWithCompletion:(void(^)(AccountRequest *request, NSString *errorMessage)) block {}
+- (void)leaveBalanceWithCompletion:(void(^)(NSString *balance, NSString *errorMessage)) block {}
 - (void)saveHours:(NSString *)hours accountIndex:(NSUInteger)accountIndex dayIndex:(NSUInteger)dayIndex completion:(void(^)(BOOL success, NSString *errorMessage))completion {}
 
 @end

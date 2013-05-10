@@ -182,7 +182,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.90000000000000002" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="5aa-JM-gG3">
-                            <rect key="frame" x="0.0" y="81" width="320" height="155"/>
+                            <rect key="frame" x="0.0" y="81" width="320" height="236"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="shadow@2x.png" translatesAutoresizingMaskIntoConstraints="NO" id="Cp7-jh-Ure">
@@ -227,24 +227,53 @@
                                     <color key="shadowColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
                                     <size key="shadowOffset" width="0.0" height="1"/>
                                 </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Leave Balance" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="UqH-1s-i0P">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="41" id="b8J-pW-npA"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
+                                    <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                    <color key="shadowColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
+                                    <size key="shadowOffset" width="0.0" height="1"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="54.05 Hours" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="dse-7U-HIf">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="18" id="REW-dm-d1v"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="11"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                    <color key="shadowColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
+                                    <size key="shadowOffset" width="0.0" height="1"/>
+                                </label>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="pAv-0K-BcY"/>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="UqH-1s-i0P" firstAttribute="trailing" secondItem="y33-Es-6Pb" secondAttribute="trailing" type="default" id="3CB-ds-1bK"/>
+                                <constraint firstItem="pAv-0K-BcY" firstAttribute="centerX" secondItem="dse-7U-HIf" secondAttribute="centerX" type="default" id="3Up-lN-NnZ"/>
                                 <constraint firstItem="KGL-9O-Kok" firstAttribute="leading" secondItem="XCl-AY-SLa" secondAttribute="leading" type="default" id="4Kh-eM-nnE"/>
-                                <constraint firstAttribute="bottom" secondItem="Xqv-d9-k73" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="8R0-HV-tqp"/>
+                                <constraint firstItem="Xqv-d9-k73" firstAttribute="top" secondItem="XCl-AY-SLa" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="ALH-uj-GO7"/>
                                 <constraint firstAttribute="centerX" secondItem="XCl-AY-SLa" secondAttribute="centerX" type="user" id="CRs-Yf-VIr"/>
                                 <constraint firstItem="98U-Lc-fdQ" firstAttribute="top" secondItem="y33-Es-6Pb" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="EWZ-Jg-Rll"/>
+                                <constraint firstItem="UqH-1s-i0P" firstAttribute="leading" secondItem="y33-Es-6Pb" secondAttribute="leading" type="default" id="Eu4-SH-aZm"/>
+                                <constraint firstAttribute="bottom" secondItem="dse-7U-HIf" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="G77-34-ISE"/>
                                 <constraint firstItem="Cp7-jh-Ure" firstAttribute="top" secondItem="5aa-JM-gG3" secondAttribute="top" type="default" id="Hll-fS-pM9"/>
-                                <constraint firstItem="XCl-AY-SLa" firstAttribute="top" secondItem="5aa-JM-gG3" secondAttribute="top" constant="106" id="Hno-kx-FMd"/>
                                 <constraint firstAttribute="centerX" secondItem="y33-Es-6Pb" secondAttribute="centerX" type="user" id="Md0-rJ-8lm"/>
+                                <constraint firstItem="dse-7U-HIf" firstAttribute="trailing" secondItem="Xqv-d9-k73" secondAttribute="trailing" type="default" id="PHn-Ot-PBw"/>
                                 <constraint firstItem="Cp7-jh-Ure" firstAttribute="trailing" secondItem="5aa-JM-gG3" secondAttribute="trailing" type="default" id="Ptj-DA-zzO"/>
+                                <constraint firstItem="dse-7U-HIf" firstAttribute="leading" secondItem="Xqv-d9-k73" secondAttribute="leading" type="default" id="RMa-yu-U3S"/>
                                 <constraint firstAttribute="centerX" secondItem="KGL-9O-Kok" secondAttribute="centerX" type="user" id="TtX-h4-SRP"/>
                                 <constraint firstItem="98U-Lc-fdQ" firstAttribute="leading" secondItem="KGL-9O-Kok" secondAttribute="leading" type="default" id="UNU-CS-Cuh"/>
+                                <constraint firstItem="dse-7U-HIf" firstAttribute="top" secondItem="UqH-1s-i0P" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Zod-sj-Oa9"/>
                                 <constraint firstItem="y33-Es-6Pb" firstAttribute="top" secondItem="Cp7-jh-Ure" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="dDo-9x-Znt"/>
                                 <constraint firstItem="Xqv-d9-k73" firstAttribute="leading" secondItem="XCl-AY-SLa" secondAttribute="leading" type="default" id="dGy-y0-Wrr"/>
                                 <constraint firstAttribute="centerX" secondItem="Xqv-d9-k73" secondAttribute="centerX" type="user" id="kNk-2R-2Fm"/>
                                 <constraint firstItem="KGL-9O-Kok" firstAttribute="top" secondItem="5aa-JM-gG3" secondAttribute="top" constant="74" id="odc-L1-Ucp"/>
+                                <constraint firstItem="UqH-1s-i0P" firstAttribute="top" secondItem="Xqv-d9-k73" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="qkv-jw-kIl"/>
                                 <constraint firstItem="Cp7-jh-Ure" firstAttribute="leading" secondItem="5aa-JM-gG3" secondAttribute="leading" type="default" id="rT6-XQ-Dik"/>
+                                <constraint firstItem="pAv-0K-BcY" firstAttribute="centerY" secondItem="dse-7U-HIf" secondAttribute="centerY" type="default" id="t3X-WV-bQc"/>
                                 <constraint firstAttribute="centerX" secondItem="98U-Lc-fdQ" secondAttribute="centerX" type="user" id="vZz-BE-7z3"/>
                             </constraints>
                         </view>
@@ -306,11 +335,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="pAv-0K-BcY" id="ePR-Xa-Lmg"/>
                         <outlet property="daysProgress" destination="XCl-AY-SLa" id="fsr-Ii-9HN"/>
                         <outlet property="daysText" destination="Xqv-d9-k73" id="V1T-Th-ezu"/>
                         <outlet property="footerView" destination="5aa-JM-gG3" id="Drp-O5-dJV"/>
                         <outlet property="hoursProgress" destination="98U-Lc-fdQ" id="TOu-Wx-geA"/>
                         <outlet property="hoursText" destination="KGL-9O-Kok" id="Vav-2c-HGN"/>
+                        <outlet property="leaveBalanceText" destination="dse-7U-HIf" id="VO9-I0-1dK"/>
                         <segue destination="zHS-IL-9ua" kind="modal" identifier="login" id="ovw-Nk-D2o"/>
                     </connections>
                 </tableViewController>
@@ -526,11 +557,13 @@
             <relationships>
                 <relationship kind="action" name="refresh:"/>
                 <relationship kind="action" name="signIn:" candidateClass="UIStoryboardSegue"/>
+                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="daysProgress" candidateClass="UIProgressView"/>
                 <relationship kind="outlet" name="daysText" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="footerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="hoursProgress" candidateClass="UIProgressView"/>
                 <relationship kind="outlet" name="hoursText" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="leaveBalanceText" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="ATMHourEntryViewController" superclassName="UIViewController">

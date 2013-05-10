@@ -108,6 +108,36 @@
 }
 
 
+- (void)leaveBalanceWithCompletion:(void(^)(NSString *balance, NSString *errorMessage)) block {
+    if ([NSThread currentThread] != workerThread) {
+		block = [block copy];        
+        [self performSelector:_cmd onThread:workerThread withObject:block waitUntilDone:NO];
+        return;
+    }
+    
+    NSString *error = nil;
+    if (![self loginWithError:&error]) {
+        if (block) {
+            dispatch_async(dispatch_get_main_queue(), ^{ block(nil, error); });
+        }
+        return;
+    }
+    
+    
+    NSDictionary *cred = [[NSUserDefaults standardUserDefaults] objectForKey:kTenanuCredentials];
+    NSString *reportUrl = [cred[@"url"] stringByAppendingPathComponent:@"/action/reports/leave_balance"];
+    
+    NSString *result = nil;
+    [syncronousWebView load:reportUrl];
+    if ([syncronousWebView waitForElement:@"#reportContent td.project"]) {
+        result = [syncronousWebView resultFromScript:@"ptoBalance"];
+    }
+    
+    if (block) {
+        dispatch_async(dispatch_get_main_queue(), ^{ block(result, error); });
+    }
+}
+
 - (void)saveHours:(NSString *)hours accountIndex:(NSUInteger)accountIndex dayIndex:(NSUInteger)dayIndex completion:(void(^)(BOOL success, NSString *errorMessage))block {
     
     if ([NSThread currentThread] != workerThread) {
