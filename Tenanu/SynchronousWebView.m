@@ -24,6 +24,11 @@
 @synthesize webview;
 
 - (void)reset {
+    if (webview) {
+        webview.delegate = nil;
+        [webview stopLoading];
+        webview.delegate = self;
+    }
     webViewLoads = 0;
     
     wait_sem = dispatch_semaphore_create(0);
