@@ -3,4 +3,4 @@ var input = document.querySelectorAll('#r#{accountIndex} td input.hours')[#{dayI
 input.value = '#{hours}';
 changeCell(input);
 
-$('button_save-button').click();
+document.getElementById('button_save-button').click();

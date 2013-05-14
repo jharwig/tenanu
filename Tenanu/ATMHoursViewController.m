@@ -19,6 +19,11 @@
 
 @implementation ATMHoursViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.title = self.account.name;
+}
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     

@@ -15,6 +15,7 @@
     _account = anAccount;
     
     self.accountLabel.text = _account.name;
+    self.accountCodeLabel.text = _account.code;
     self.hoursLabel.text = [[NSNumber numberWithFloat:_account.totalHours] formattedNumber];
 }
 

@@ -29,6 +29,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(timeoutNotification:) name:kTenanuNotificationRefreshNeeded object:nil];
     
     self.footerView.hidden = YES;
+    self.navigationItem.leftBarButtonItem = nil;
     
     if (!self.accountRequest)
         [self refresh:nil];
@@ -68,6 +69,23 @@
         vc.accountIndex = [self.accountRequest.accounts indexOfObject:cell.account];
     }
     [super prepareForSegue:segue sender:sender];
+}
+
+- (IBAction)toggleWebview:(id)sender {
+    
+    UIWebView *webview = (UIWebView *)[self.view.window viewWithTag:9999];
+    
+    
+    if (webview) {
+        [webview removeFromSuperview];
+    } else {
+        webview = [[UnanetService sharedInstance] valueForKeyPath:@"syncronousWebView.webview"];
+        
+        webview.tag = 9999;
+        webview.frame = CGRectOffset(CGRectInset(self.view.window.bounds, 0, 150), 0, 150);
+        [self.view.window addSubview:webview];
+    }
+
 }
 
 - (IBAction)refresh:(id)sender {    

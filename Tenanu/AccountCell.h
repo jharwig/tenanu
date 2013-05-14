@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *accountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *hoursLabel;
+@property (weak, nonatomic) IBOutlet UILabel *accountCodeLabel;
 @property (strong, nonatomic) Account *account;
 
 @end

@@ -18,9 +18,16 @@ for (var i = 0; i < accountRows.length; i++) {
     accountCells = accountRows[i].querySelectorAll('td');
     total = +(accountRows[i].querySelector('.total').innerText);
     cumm_total += total;
+    account_name = accountCells[0].innerText;
+    account_code = '';
+    match = account_name.match(/^\s*([\w\d]{4}-\d{3})\s+(.*)\s*$/);
+    if (match) {
+        account_name = match[2];
+        account_code = match[1];
+    }
     accounts.push({
-                  name: accountCells[0].innerText,
-                  code: accountCells[1].innerText,
+                  name: account_name,
+                  code: account_code,
                   hours: hours,
                   total: total
                   });

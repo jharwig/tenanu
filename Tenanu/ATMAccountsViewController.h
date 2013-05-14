@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UILabel *leaveBalanceText;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+- (IBAction)toggleWebview:(id)sender;
 
 - (IBAction)refresh:(id)sender;
 @end

@@ -24,7 +24,7 @@
     return sharedInstance;
 }
 
-- (BOOL)loginWithError:(NSString **)errorMessage {
+- (BOOL)loadPath:(NSString *)path successSelector:(NSString *)successSelector withError:(NSString **)errorMessage {
     
     NSDictionary *cred = [[NSUserDefaults standardUserDefaults] objectForKey:kTenanuCredentials];
     if (!cred) {
@@ -32,26 +32,24 @@
         return NO;
     }
     
-    [syncronousWebView load:[cred objectForKey:@"url"]];
+    [syncronousWebView load:[[cred objectForKey:@"url"] stringByAppendingPathComponent:path]];
     
-    if (![syncronousWebView waitForElement:@"#active-timesheet-list" errorElement:@"input#password"]) {
+    if (![syncronousWebView waitForElement:successSelector errorElement:@"input#password"]) {
         
         if ([syncronousWebView waitForElement:@"#password"]) {
 
             // Login
             [syncronousWebView resultFromScript:@"login" input:cred];
-            if (![syncronousWebView waitForElement:@"#active-timesheet-list" errorElement:@"p.error"]) {
+            if (![syncronousWebView waitForElement:successSelector errorElement:@"p.error"]) {
                 *errorMessage = [syncronousWebView resultFromScript:@"loginError"];
                 return NO;
-            }
+            } else [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kTenanuLastLoginDate];
             
         } else {
             return NO;
         }
     }
     
-    
-    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kTenanuLastLoginDate];
     return YES;
 }
 
@@ -78,7 +76,7 @@
 #endif
     
     NSString *error = nil;
-    if (![self loginWithError:&error]) {
+    if (![self loadPath:@"/action/time" successSelector:@"#active-timesheet-list" withError:&error]) {
         if (block) {
             dispatch_async(dispatch_get_main_queue(), ^{ block(nil, error); });
         }
@@ -114,24 +112,16 @@
         [self performSelector:_cmd onThread:workerThread withObject:block waitUntilDone:NO];
         return;
     }
-    
+
     NSString *error = nil;
-    if (![self loginWithError:&error]) {
+    if (![self loadPath:@"/action/reports/leave_balance" successSelector:@"#reportContent td.project" withError:&error]) {
         if (block) {
             dispatch_async(dispatch_get_main_queue(), ^{ block(nil, error); });
         }
         return;
     }
     
-    
-    NSDictionary *cred = [[NSUserDefaults standardUserDefaults] objectForKey:kTenanuCredentials];
-    NSString *reportUrl = [cred[@"url"] stringByAppendingPathComponent:@"/action/reports/leave_balance"];
-    
-    NSString *result = nil;
-    [syncronousWebView load:reportUrl];
-    if ([syncronousWebView waitForElement:@"#reportContent td.project"]) {
-        result = [syncronousWebView resultFromScript:@"ptoBalance"];
-    }
+    NSString *result = [syncronousWebView resultFromScript:@"ptoBalance"];
     
     if (block) {
         dispatch_async(dispatch_get_main_queue(), ^{ block(result, error); });
@@ -157,7 +147,7 @@
     
     
     NSString *error = nil;
-    if (![self loginWithError:&error]) {
+    if (![self loadPath:@"/action/time/current" successSelector:@"#active-timesheet-list" withError:&error]) {
         if (block) {
             dispatch_async(dispatch_get_main_queue(), ^{ block(NO, error); });
         }
@@ -166,7 +156,6 @@
     
     BOOL success = NO;
     
-    [syncronousWebView resultFromScript:@"navigateEditTimesheet"];
     if ([syncronousWebView waitForElement:@"#timeContent"]) {
         
         [syncronousWebView resultFromScript:@"saveHours" input:@{
