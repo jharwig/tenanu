@@ -11,8 +11,6 @@
 
 @implementation Account
 
-@synthesize name, code, hours;
-
 
 + (id)accountWithJsonDictionary:(NSDictionary *)d {
     Account *inst = [[Account alloc] init];
@@ -20,6 +18,8 @@
     inst.name = [d objectForKey:@"name"];
     inst.code = [d objectForKey:@"code"];
     inst.hours = [d objectForKey:@"hours"];
+    inst.unused = [[d objectForKey:@"unused"] boolValue];
+    inst.optionValue = [d objectForKey:@"optionVal"];
     
     return inst;
 }
@@ -27,7 +27,7 @@
 
 - (float)totalHours {
     float total = 0;
-    for (NSNumber *hoursInDay in hours) {
+    for (NSNumber *hoursInDay in self.hours) {
         if (![hoursInDay isEqual:[NSNull null]]) {
             total += [hoursInDay floatValue];
         }

@@ -8,6 +8,7 @@
 
 #import "ATMHourEntryViewController.h"
 #import "UnanetService.h"
+#import "Account.h"
 
 @interface ATMHourEntryViewController () 
 @property (nonatomic, strong) NSArray *pickerMinutes;
@@ -30,7 +31,7 @@ static NSDateFormatter *formatter;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.accountLabel.text = self.accountName;
+    self.accountLabel.text = self.account.name;
     self.hourField.text = self.hours;
     self.dateLabel.text = [formatter stringFromDate:self.date];
     
@@ -51,7 +52,7 @@ static NSDateFormatter *formatter;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES].labelText = @"Saving";
         
     [[UnanetService sharedInstance] saveHours:self.hours
-                                 accountIndex:[[controller valueForKeyPath:@"accountIndex"] integerValue]
+                                      account:self.account
                                      dayIndex:[[controller valueForKeyPath:@"savedHoursIndexPath"] row]
                                    completion:^(BOOL success, NSString *errorMessage) {
                                         [MBProgressHUD hideHUDForView:self.view animated:YES];

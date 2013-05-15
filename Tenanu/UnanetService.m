@@ -12,6 +12,7 @@
 #import "UnanetService.h"
 #import "SynchronousWebView.h"
 #import "AccountRequest.h"
+#import "Account.h"
 
 @implementation UnanetService
 
@@ -76,33 +77,31 @@
 #endif
     
     NSString *error = nil;
-    if (![self loadPath:@"/action/time" successSelector:@"#active-timesheet-list" withError:&error]) {
+    if (![self loadPath:@"/action/time/current" successSelector:@"#timeContent" withError:&error]) {
         if (block) {
             dispatch_async(dispatch_get_main_queue(), ^{ block(nil, error); });
         }
         return;
     }
-        
-    [syncronousWebView resultFromScript:@"navigateTimesheet"];
     
-    
-    
-    
-    if ([syncronousWebView waitForElement:@"#buttons"]) {
-        NSString *accountsJson;
-        int try = 1;
-        do {
-            accountsJson = [syncronousWebView resultFromScript:@"queryPage"];
+
+
+    NSString *accountsJson;
+    int try = 1;
+    do {
+        accountsJson = [syncronousWebView resultFromScript:@"queryPage"];
+        if ([accountsJson length] == 0) {
             [NSThread sleepForTimeInterval:1.0];
-        } while ([accountsJson length] == 0 && ++try <= RETRY_COUNT);
-        
-        NSDictionary *accounts = [accountsJson jsonObject];
-        
-        AccountRequest *request = [AccountRequest accountRequestWithJsonDictionary:accounts];
-        
-        if (block)
-            dispatch_async(dispatch_get_main_queue(), ^{ block(request, nil); });
-    }
+        }
+    } while ([accountsJson length] == 0 && ++try <= RETRY_COUNT);
+    
+    NSDictionary *accounts = [accountsJson jsonObject];
+    
+    AccountRequest *request = [AccountRequest accountRequestWithJsonDictionary:accounts];
+    
+    if (block)
+        dispatch_async(dispatch_get_main_queue(), ^{ block(request, nil); });
+
 }
 
 
@@ -128,7 +127,7 @@
     }
 }
 
-- (void)saveHours:(NSString *)hours accountIndex:(NSUInteger)accountIndex dayIndex:(NSUInteger)dayIndex completion:(void(^)(BOOL success, NSString *errorMessage))block {
+- (void)saveHours:(NSString *)hours account:(Account *)account dayIndex:(NSUInteger)dayIndex completion:(void(^)(BOOL success, NSString *errorMessage))block {
     
     if ([NSThread currentThread] != workerThread) {
 		block = [block copy];
@@ -137,7 +136,7 @@
         [i setSelector:_cmd];
         [i setTarget:self];
         [i setArgument:&hours atIndex:2];
-        [i setArgument:&accountIndex atIndex:3];
+        [i setArgument:&account atIndex:3];
         [i setArgument:&dayIndex atIndex:4];
         [i setArgument:&block atIndex:5];
         [i retainArguments];
@@ -147,7 +146,7 @@
     
     
     NSString *error = nil;
-    if (![self loadPath:@"/action/time/current" successSelector:@"#active-timesheet-list" withError:&error]) {
+    if (![self loadPath:@"/action/time/current" successSelector:@"#timeContent" withError:&error]) {
         if (block) {
             dispatch_async(dispatch_get_main_queue(), ^{ block(NO, error); });
         }
@@ -156,23 +155,22 @@
     
     BOOL success = NO;
     
-    if ([syncronousWebView waitForElement:@"#timeContent"]) {
+  
+    [syncronousWebView resultFromScript:@"saveHours" input:@{
+     @"accountValue": account.optionValue,
+     @"dayIndex":[NSString stringWithFormat:@"%i", dayIndex],
+     @"hours": hours
+     }];
+    
+    if (![syncronousWebView waitForElement:@"#timeContent" errorElement:@"form[name=comments]"]) {
         
-        [syncronousWebView resultFromScript:@"saveHours" input:@{
-         @"accountIndex": [NSString stringWithFormat:@"%i", accountIndex],
-         @"dayIndex":[NSString stringWithFormat:@"%i", dayIndex],
-         @"hours": hours
-         }];
-        
-        if (![syncronousWebView waitForElement:@"#timeContent" errorElement:@"form[name=comments]"]) {
-            
-            id result = [syncronousWebView resultFromScript:@"saveErrors"];
-            NSLog(@"%@", result);
-            error = @"Some audit comments required";
+        id result = [syncronousWebView resultFromScript:@"saveErrors"];
+        NSLog(@"%@", result);
+        error = @"Some audit comments required";
 
-        } else success = YES;
-                
-    }
+    } else success = YES;
+            
+    
     
     if (block) {
         dispatch_async(dispatch_get_main_queue(), ^{ block(success, error); });

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class Account;
+
 @interface ATMHourEntryViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *accountLabel;
@@ -15,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *hourField;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 
-@property (strong, nonatomic) NSString *accountName;
+@property (strong, nonatomic) Account *account;
 @property (strong, nonatomic) NSDate *date;
 @property (strong, nonatomic) NSString *hours;
 

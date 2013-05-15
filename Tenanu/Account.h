@@ -9,16 +9,13 @@
 #import <Foundation/Foundation.h>
 
 
-@interface Account : NSObject {
-    NSString *name;
-    NSString *code;
-    NSArray *hours;
-    
-}
+@interface Account : NSObject
 
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *code;
 @property (nonatomic, copy) NSArray *hours;
+@property (nonatomic, assign) BOOL unused;
+@property (nonatomic, retain) NSString *optionValue;
 @property (nonatomic, readonly) float totalHours;
 
 + (id)accountWithJsonDictionary:(NSDictionary *)d;

@@ -16,6 +16,7 @@
 
 @interface ATMAccountsViewController () {
     NSString *errorMessage;
+    BOOL showUnusedAccounts;
 }
 @property (nonatomic, strong) AccountRequest *accountRequest;
 @end
@@ -25,6 +26,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    showUnusedAccounts = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(timeoutNotification:) name:kTenanuNotificationRefreshNeeded object:nil];
     
@@ -89,7 +92,9 @@
 }
 
 - (IBAction)refresh:(id)sender {    
-
+    showUnusedAccounts = NO;
+    [self.tableView reloadData];
+    
     if (!self.accountRequest)
         self.footerView.hidden = YES;
 
@@ -155,6 +160,13 @@
 
 }
 
+- (NSArray *)accountsToDisplay {
+    if (showUnusedAccounts)
+        return self.accountRequest.accounts;
+    
+    return [self.accountRequest.accounts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"unused = NO"]];
+
+}
 
 #pragma mark -
 #pragma mark Table view data source
@@ -164,19 +176,28 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.accountRequest.accounts count];
+    NSUInteger count = [[self accountsToDisplay] count];
+    if (count == 0) return 0;
+    return count + (showUnusedAccounts ? 0 : 1);
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"ChargeCell";
-    AccountCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *AccountCellIdentifier = @"ChargeCell";
+    static NSString *AddNewIdentifier = @"AddNewCell";
+    
+    NSArray *accounts = [self accountsToDisplay];
+    if (indexPath.row >= [accounts count]) {
+        return [tableView dequeueReusableCellWithIdentifier:AddNewIdentifier];
+    }
+    
+    AccountCell *cell = [tableView dequeueReusableCellWithIdentifier:AccountCellIdentifier];
     cell.backgroundColor = [UIColor whiteColor];
+    
     Account *account = [self.accountRequest.accounts objectAtIndex:indexPath.row];
-    
     cell.account = account;
-    
+
     return cell;
 }
 
@@ -189,5 +210,29 @@
 #pragma mark -
 #pragma mark Table view delegate
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSArray *accounts = [self accountsToDisplay];
+    if (indexPath.row >= [accounts count]) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        [tableView beginUpdates];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        NSMutableArray *paths = [NSMutableArray array];
+        int i = indexPath.row;
+        for (Account *account in self.accountRequest.accounts) {
+            if (account.unused) {
+                [paths addObject:[NSIndexPath indexPathForRow:i++ inSection:indexPath.section]];
+            }
+
+        }
+        
+        [tableView insertRowsAtIndexPaths:paths
+                         withRowAnimation:UITableViewRowAnimationTop];
+
+        showUnusedAccounts = YES;
+        [tableView endUpdates];
+    }
+}
 
 @end

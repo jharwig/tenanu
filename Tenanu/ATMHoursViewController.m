@@ -63,7 +63,7 @@
         
         savedHoursIndexPath = [self.tableView indexPathForCell:cell];
         
-        hourEntryViewController.accountName = self.account.name;
+        hourEntryViewController.account = self.account;
         hourEntryViewController.date = cell.date;
         hourEntryViewController.hours = cell.hours;
     }

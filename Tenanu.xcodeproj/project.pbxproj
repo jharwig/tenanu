@@ -54,11 +54,9 @@
 		91F0C4A7173AE1E400BF24F2 /* ATMSynchronousWebViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F0C4A6173AE1E400BF24F2 /* ATMSynchronousWebViewTests.m */; };
 		91F0C4C4173AEF3D00BF24F2 /* AccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F0C4C3173AEF3D00BF24F2 /* AccountCell.m */; };
 		91F0C4C5173AF0DB00BF24F2 /* login.js in Resources */ = {isa = PBXBuildFile; fileRef = 91F0C4A9173AEA6D00BF24F2 /* login.js */; };
-		91F0C4C6173AF0DB00BF24F2 /* navigateTimesheet.js in Resources */ = {isa = PBXBuildFile; fileRef = 91F0C4AF173AEDA800BF24F2 /* navigateTimesheet.js */; };
 		91F0C4C7173AF0DB00BF24F2 /* queryPage.js in Resources */ = {isa = PBXBuildFile; fileRef = 91F0C4B0173AEDA800BF24F2 /* queryPage.js */; };
 		91F0C4C8173AF0DB00BF24F2 /* saveHours.js in Resources */ = {isa = PBXBuildFile; fileRef = 91F0C4B1173AEDA800BF24F2 /* saveHours.js */; };
 		91F0C4CA173AF0E100BF24F2 /* login.js in Resources */ = {isa = PBXBuildFile; fileRef = 91F0C4A9173AEA6D00BF24F2 /* login.js */; };
-		91F0C4CB173AF0E100BF24F2 /* navigateTimesheet.js in Resources */ = {isa = PBXBuildFile; fileRef = 91F0C4AF173AEDA800BF24F2 /* navigateTimesheet.js */; };
 		91F0C4CC173AF0E100BF24F2 /* queryPage.js in Resources */ = {isa = PBXBuildFile; fileRef = 91F0C4B0173AEDA800BF24F2 /* queryPage.js */; };
 		91F0C4CD173AF0E100BF24F2 /* saveHours.js in Resources */ = {isa = PBXBuildFile; fileRef = 91F0C4B1173AEDA800BF24F2 /* saveHours.js */; };
 		91F0C4D1173AF59100BF24F2 /* ATMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F0C4D0173AF59100BF24F2 /* ATMLoginViewController.m */; };
@@ -131,7 +129,6 @@
 		91F0C4A5173AE1E400BF24F2 /* ATMSynchronousWebViewTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMSynchronousWebViewTests.h; sourceTree = "<group>"; };
 		91F0C4A6173AE1E400BF24F2 /* ATMSynchronousWebViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMSynchronousWebViewTests.m; sourceTree = "<group>"; };
 		91F0C4A9173AEA6D00BF24F2 /* login.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = login.js; sourceTree = "<group>"; };
-		91F0C4AF173AEDA800BF24F2 /* navigateTimesheet.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = navigateTimesheet.js; sourceTree = "<group>"; };
 		91F0C4B0173AEDA800BF24F2 /* queryPage.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = queryPage.js; sourceTree = "<group>"; };
 		91F0C4B1173AEDA800BF24F2 /* saveHours.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = saveHours.js; sourceTree = "<group>"; };
 		91F0C4C2173AEF3D00BF24F2 /* AccountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountCell.h; sourceTree = "<group>"; };
@@ -308,7 +305,6 @@
 			children = (
 				91F0C4A9173AEA6D00BF24F2 /* login.js */,
 				91D54EA3173C002700F90EA8 /* loginError.js */,
-				91F0C4AF173AEDA800BF24F2 /* navigateTimesheet.js */,
 				91F0C4B0173AEDA800BF24F2 /* queryPage.js */,
 				91F0C4B1173AEDA800BF24F2 /* saveHours.js */,
 				91A31403173DAEFF00F6D30C /* ptoBalance.js */,
@@ -413,7 +409,6 @@
 				91D54EA7173C0A7800F90EA8 /* test-data.json in Resources */,
 				91F0C4C5173AF0DB00BF24F2 /* login.js in Resources */,
 				91D54EA5173C08F200F90EA8 /* loginError.js in Resources */,
-				91F0C4C6173AF0DB00BF24F2 /* navigateTimesheet.js in Resources */,
 				91F0C4C7173AF0DB00BF24F2 /* queryPage.js in Resources */,
 				91F0C4C8173AF0DB00BF24F2 /* saveHours.js in Resources */,
 				91A31404173DAF0700F6D30C /* ptoBalance.js in Resources */,
@@ -433,7 +428,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				91F0C4CA173AF0E100BF24F2 /* login.js in Resources */,
-				91F0C4CB173AF0E100BF24F2 /* navigateTimesheet.js in Resources */,
 				91F0C4CC173AF0E100BF24F2 /* queryPage.js in Resources */,
 				91F0C4CD173AF0E100BF24F2 /* saveHours.js in Resources */,
 				91F0C470173AD97C00BF24F2 /* InfoPlist.strings in Resources */,

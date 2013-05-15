@@ -182,7 +182,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.90000000000000002" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="5aa-JM-gG3">
-                            <rect key="frame" x="0.0" y="81" width="320" height="236"/>
+                            <rect key="frame" x="0.0" y="125" width="320" height="236"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="shadow@2x.png" translatesAutoresizingMaskIntoConstraints="NO" id="Cp7-jh-Ure">
@@ -332,6 +332,31 @@
                                     <outlet property="hoursLabel" destination="St1-Jd-8Tu" id="czT-3g-gv7"/>
                                     <segue destination="jzG-R3-5fG" kind="push" id="wDl-w3-uca"/>
                                 </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddNewCell" rowHeight="44" id="sY8-0G-e6U">
+                                <rect key="frame" x="0.0" y="81" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Add Account..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="utZ-Kp-Xl9">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="35" type="user" id="PtD-7B-dc2"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="utZ-Kp-Xl9" firstAttribute="leading" secondItem="sY8-0G-e6U" secondAttribute="leading" constant="20" type="default" id="3uL-gv-f38"/>
+                                    <constraint firstAttribute="trailing" secondItem="utZ-Kp-Xl9" secondAttribute="trailing" constant="20" type="default" id="I9O-dm-oJb"/>
+                                    <constraint firstAttribute="centerY" secondItem="utZ-Kp-Xl9" secondAttribute="centerY" type="user" id="X96-6N-jgP"/>
+                                </constraints>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -574,6 +599,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ATMAccountsViewController.h"/>
             <relationships>
                 <relationship kind="action" name="refresh:"/>
+                <relationship kind="action" name="signIn:" candidateClass="UIStoryboardSegue"/>
                 <relationship kind="action" name="toggleWebview:"/>
                 <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="daysProgress" candidateClass="UIProgressView"/>
@@ -607,6 +633,9 @@
         </class>
         <class className="ATMHoursViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ATMHoursViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelHours:" candidateClass="UIStoryboardSegue"/>
+            </relationships>
         </class>
         <class className="ATMLoginViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ATMLoginViewController.h"/>
@@ -629,6 +658,9 @@
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="UIStoryboardSegue" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIStoryboardSegue.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
