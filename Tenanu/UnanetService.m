@@ -44,8 +44,12 @@
             if (![syncronousWebView waitForElement:successSelector errorElement:@"p.error"]) {
                 *errorMessage = [syncronousWebView resultFromScript:@"loginError"];
                 return NO;
-            } else [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kTenanuLastLoginDate];
-            
+            } else if ([syncronousWebView waitForElement:successSelector]) {
+                [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kTenanuLastLoginDate];
+            } else {
+                *errorMessage = @"Unable to load current timesheet";
+                return NO;
+            }
         } else {
             return NO;
         }
@@ -77,7 +81,7 @@
 #endif
     
     NSString *error = nil;
-    if (![self loadPath:@"/action/time/current" successSelector:@"#timeContent" withError:&error]) {
+    if (![self loadPath:@"/action/time/current" successSelector:@"#timeContent .timesheet td.project select" withError:&error]) {
         if (block) {
             dispatch_async(dispatch_get_main_queue(), ^{ block(nil, error); });
         }
