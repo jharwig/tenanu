@@ -10,6 +10,7 @@
 #import "SynchronousWebView.h"
 #import "AccountRequest.h"
 #import "Account.h"
+#import "SubmitRequest.h"
 
 @implementation RemoteService
 
@@ -35,7 +36,10 @@
     }
 }
 
+
 - (void)chargesWithCompletion:(void(^)(AccountRequest *request, NSString *errorMessage)) block {}
 - (void)leaveBalanceWithCompletion:(void(^)(NSString *balance, NSString *errorMessage)) block {}
 - (void)saveHours:(NSString *)hours account:(Account *)account dayIndex:(NSUInteger)dayIndex completion:(void(^)(BOOL success, NSString *errorMessage))completion {}
+- (void)submitTimesheet:(void(^)(SubmitRequest *request)) block {}
+
 @end

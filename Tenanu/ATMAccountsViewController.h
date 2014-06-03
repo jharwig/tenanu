@@ -15,8 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *daysText;
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UILabel *leaveBalanceText;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *submitButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-- (IBAction)toggleWebview:(id)sender;
 
+- (IBAction)submitTimesheet:(id)sender;
 - (IBAction)refresh:(id)sender;
 @end

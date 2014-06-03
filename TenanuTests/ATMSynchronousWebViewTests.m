@@ -35,8 +35,8 @@
 {
     ASYNC(
           [wv load:UNANET_LOGIN];
-          STAssertTrue([wv waitForElement:@"#username"], @"Page contains username field");
-          STAssertTrue([wv waitForElement:@"#password"], @"Page contains password field");
+          XCTAssertTrue([wv waitForElement:@"#username"], @"Page contains username field");
+          XCTAssertTrue([wv waitForElement:@"#password"], @"Page contains password field");
     );
 }
 
@@ -48,7 +48,7 @@
           [wv resultFromScript:@"login.js" input:cred];
           BOOL result = [wv waitForElement:@"#active-timesheet-list"];
           
-          STAssertTrue(result, @"Could not find active timesheets");
+          XCTAssertTrue(result, @"Could not find active timesheets");
     );
 }
 

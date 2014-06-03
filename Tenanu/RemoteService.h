@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class SynchronousWebView, AccountRequest, Account;
+@class SynchronousWebView, AccountRequest, Account, SubmitRequest;
 
 #define RETRY_COUNT 4
 
@@ -22,5 +22,5 @@
 - (void)leaveBalanceWithCompletion:(void(^)(NSString *balance, NSString *errorMessage)) block;
 - (void)chargesWithCompletion:(void(^)(AccountRequest *request, NSString *errorMessage)) block;
 - (void)saveHours:(NSString *)hours account:(Account *)account dayIndex:(NSUInteger)dayIndex completion:(void(^)(BOOL success, NSString *errorMessage))completion;
-
+- (void)submitTimesheet:(void(^)(SubmitRequest *request)) block;
 @end

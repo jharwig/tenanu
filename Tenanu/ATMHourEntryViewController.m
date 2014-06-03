@@ -128,8 +128,8 @@ static NSDateFormatter *formatter;
 - (void)setupPicker {
     NSMutableArray *h = [NSMutableArray array];
     NSMutableArray *m = [NSMutableArray array];
-    int selectedHourRow = NSNotFound;
-    int selectedMinuteRow = NSNotFound;
+    NSInteger selectedHourRow = NSNotFound;
+    NSInteger selectedMinuteRow = NSNotFound;
     
     NSRange r = [self.hours rangeOfString:@"."];
     NSString *hourComponent = nil;

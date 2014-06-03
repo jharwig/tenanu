@@ -62,8 +62,8 @@
         
         // Total Number of Days in Range
         NSCalendar *cal = [NSCalendar currentCalendar];    
-        int totalDays = [[cal components:NSDayCalendarUnit fromDate:start toDate:end options:0] day] + 1;
-        int finishedDays = [[cal components:NSDayCalendarUnit fromDate:start toDate:[NSDate date] options:0] day] + 1;
+        NSInteger totalDays = [[cal components:NSDayCalendarUnit fromDate:start toDate:end options:0] day] + 1;
+        NSInteger finishedDays = [[cal components:NSDayCalendarUnit fromDate:start toDate:[NSDate date] options:0] day] + 1;
         
         int totalWeekendDaysFound = 0, weekendDaysFound = 0;
         
@@ -86,7 +86,7 @@
 }
 
 - (NSString *)totalDaysDescription {
-    return [NSString stringWithFormat:@"%i of %i workdays", finishedWorkdays, totalWorkdays];
+    return [NSString stringWithFormat:@"%lu of %lu workdays", finishedWorkdays, totalWorkdays];
 }
 
 - (float)daysPercentage {

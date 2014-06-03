@@ -30,7 +30,7 @@
     NSDateComponents *timeBetween = [[NSCalendar currentCalendar] components:NSDayCalendarUnit
                                                                     fromDate:[self.range objectAtIndex:0]
                                                                       toDate:[NSDate date] options:0];
-    int days = [timeBetween day];
+    NSInteger days = [timeBetween day];
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:days inSection:0];
     

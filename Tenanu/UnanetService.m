@@ -12,6 +12,7 @@
 #import "UnanetService.h"
 #import "SynchronousWebView.h"
 #import "AccountRequest.h"
+#import "SubmitRequest.h"
 #import "Account.h"
 
 @implementation UnanetService
@@ -162,7 +163,7 @@
   
     [syncronousWebView resultFromScript:@"saveHours" input:@{
      @"accountValue": account.optionValue,
-     @"dayIndex":[NSString stringWithFormat:@"%i", dayIndex],
+     @"dayIndex":[NSString stringWithFormat:@"%lu", dayIndex],
      @"hours": hours
      }];
     
@@ -180,4 +181,35 @@
         dispatch_async(dispatch_get_main_queue(), ^{ block(success, error); });
     }
 }
+
+- (void)submitTimesheet:(void(^)(SubmitRequest *request)) block {
+    if ([NSThread currentThread] != workerThread) {
+		block = [block copy];
+        
+        NSInvocation *i = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:_cmd]];
+        [i setSelector:_cmd];
+        [i setTarget:self];
+        [i setArgument:&block atIndex:2];
+        [i retainArguments];
+        [i performSelector:@selector(invoke) onThread:workerThread withObject:nil waitUntilDone:NO];
+        return;
+    }
+    
+    NSString *error = nil;
+    if (![self loadPath:@"/action/time/current" successSelector:@"#timeContent" withError:&error]) {
+        if (block) {            
+            dispatch_async(dispatch_get_main_queue(), ^{ block(nil); });
+        }
+        return;
+    }
+    
+    
+    [syncronousWebView resultFromScript:@"submitTimesheet" input:@{}];
+    
+    // TODO
+    if (![syncronousWebView waitForElement:@"input[name=submitComments]"]) {
+        
+    }
+}
+
 @end

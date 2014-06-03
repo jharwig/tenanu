@@ -22,10 +22,19 @@
 @synthesize webview;
 
 - (void)reset {
-    if (webview && webview.loading) {
-        [webview stopLoading];
-    }
-    webViewLoads = 0;
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        if (webview && webview.loading) {
+            [webview stopLoading];
+        }
+        webViewLoads = 0;
+        
+//        [webview removeFromSuperview];
+//        
+//        if (!webview || !webview.superview) {
+//            self.webview.frame = CGRectMake(0, 0, 320, 300);
+//            [[UIApplication sharedApplication].windows[0] addSubview:webview];
+//        }
+    });
     
     wait_sem = dispatch_semaphore_create(0);
 }

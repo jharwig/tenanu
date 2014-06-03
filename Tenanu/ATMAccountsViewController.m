@@ -91,7 +91,11 @@
 
 }
 
-- (IBAction)refresh:(id)sender {    
+- (IBAction)submitTimesheet:(id)sender {
+    
+}
+
+- (IBAction)refresh:(id)sender {
     showUnusedAccounts = NO;
     [self.tableView reloadData];
     
@@ -125,6 +129,9 @@
                 self.leaveBalanceText.hidden = NO;
                 [self.activityIndicator stopAnimating];
                 self.activityIndicator.hidden = YES;
+                
+                // TODO: check if hours full
+                self.navigationItem.leftBarButtonItem = self.submitButton;
             }];
             
         } else {
@@ -219,7 +226,7 @@
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
         NSMutableArray *paths = [NSMutableArray array];
-        int i = indexPath.row;
+        NSInteger i = indexPath.row;
         for (Account *account in self.accountRequest.accounts) {
             if (account.unused) {
                 [paths addObject:[NSIndexPath indexPathForRow:i++ inSection:indexPath.section]];
